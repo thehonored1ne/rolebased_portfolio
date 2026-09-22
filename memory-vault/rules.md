@@ -14,11 +14,13 @@ tags: [rules, anti-patterns, windows, execution]
 # System Rules & Anti-Patterns
 
 ## Hard Guardrails
+
 - **Windows Path Handling**: Always use forward slashes (`/`) or escaped backslashes in script paths and command strings.
 - **Dependency Minimalization**: Do not introduce heavy dependencies when standard library or native tools suffice.
 - **Memory Recency**: Check `INDEX.md` or run `memory.py recall` before executing any multi-step task.
 - **Concise Outputs**: Do not repeat explanations; keep answers, logs, and memory entries atomic and focused.
+
 ## Laravel Rules
+
 - **Cache Clearing**: Run `php artisan optimize:clear` after editing `.env` or configuration.
 - **Validation**: Prefer FormRequest classes over inline controller validation.
-

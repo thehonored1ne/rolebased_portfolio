@@ -12,6 +12,16 @@ class AuthenticationTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->withSession([
+            'access_code_verified' => true,
+            'access_code_expires_at' => now()->addMinutes(30)->timestamp,
+        ]);
+    }
+
     public function test_login_screen_can_be_rendered()
     {
         $response = $this->get(route('login'));

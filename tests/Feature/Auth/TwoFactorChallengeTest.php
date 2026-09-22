@@ -17,6 +17,11 @@ class TwoFactorChallengeTest extends TestCase
         parent::setUp();
 
         $this->skipUnlessFortifyHas(Features::twoFactorAuthentication());
+
+        $this->withSession([
+            'access_code_verified' => true,
+            'access_code_expires_at' => now()->addMinutes(30)->timestamp,
+        ]);
     }
 
     public function test_two_factor_challenge_redirects_to_login_when_not_authenticated(): void

@@ -14,16 +14,20 @@ tags: [profile, environment, preferences]
 # Environment & Agent Profile
 
 ## Core Environment
+
 - **OS**: Windows 11 (PowerShell terminal)
 - **Runtimes**: Python 3.14+, Node.js v22+
 - **Architecture**: x86_64
 
 ## Working Preferences
+
 - **Modularity**: Small, single-purpose, atomic files.
 - **Portability**: Prefer zero-dependency or minimal-dependency solutions.
 - **Memory Protocol**: Always consult memory before task execution; persist outcomes immediately after completion.
 - **Tone & Documentation**: Direct, punchy, concise.
+
 ## Auto-Detected Project Stack
+
 - **Languages**: JavaScript/TypeScript, PHP
 - **Frameworks**: Laravel (^13.17), Inertia.js, Vite, Vue
 - **Tooling**: npm, Tailwind CSS, PHPUnit (Test Runner), Artisan CLI
