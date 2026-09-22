@@ -54,7 +54,7 @@ const submit = () => {
         <Head title="Edit Profile & Hero" />
 
         <div
-            class="flex min-h-screen max-w-4xl flex-1 flex-col gap-6 bg-[#fafafa] p-6 text-black"
+            class="flex min-h-screen w-full flex-1 flex-col gap-6 bg-[#fafafa] p-6 text-black"
         >
             <div>
                 <div class="mb-1 inline-block">

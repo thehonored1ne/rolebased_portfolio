@@ -90,7 +90,7 @@ const deleteSkill = (id: number) => {
         <Head title="Skills Manager" />
 
         <div
-            class="flex min-h-screen max-w-5xl flex-1 flex-col gap-6 bg-[#fafafa] p-6 text-black"
+            class="flex min-h-screen w-full flex-1 flex-col gap-6 bg-[#fafafa] p-6 text-black"
         >
             <div
                 class="flex flex-col justify-between gap-4 sm:flex-row sm:items-center"

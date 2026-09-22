@@ -76,7 +76,7 @@ const footerNavItems: NavItem[] = [
     <Sidebar
         collapsible="icon"
         variant="sidebar"
-        class="border-r-2 border-black bg-[#fafafa]"
+        class="border-r-2 border-black !bg-[#fafafa] !text-black [--sidebar-accent-foreground:#000000] [--sidebar-accent:#e4e4e7] [--sidebar-background:#fafafa] [--sidebar-border:#000000] [--sidebar-foreground:#000000]"
     >
         <SidebarHeader class="border-b-2 border-black bg-white p-3">
             <SidebarMenu>
@@ -84,9 +84,12 @@ const footerNavItems: NavItem[] = [
                     <SidebarMenuButton
                         size="lg"
                         as-child
-                        class="border-2 border-black bg-white shadow-[2px_2px_0px_0px_#000] hover:bg-zinc-100"
+                        class="border-2 border-black bg-white !text-black shadow-[2px_2px_0px_0px_#000] hover:bg-zinc-100 hover:!text-black"
                     >
-                        <Link :href="route('dashboard')">
+                        <Link
+                            :href="route('dashboard')"
+                            class="flex w-full items-center !text-black"
+                        >
                             <AppLogo />
                         </Link>
                     </SidebarMenuButton>

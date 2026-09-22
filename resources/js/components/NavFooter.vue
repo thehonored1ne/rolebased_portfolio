@@ -32,9 +32,13 @@ defineProps<Props>();
                             :href="toUrl(item.href)"
                             target="_blank"
                             rel="noopener noreferrer"
+                            class="flex w-full items-center gap-2.5 text-black hover:text-black"
                         >
-                            <component :is="item.icon" class="h-4 w-4" />
-                            <span>{{ item.title }}</span>
+                            <component
+                                :is="item.icon"
+                                class="h-4 w-4 shrink-0 text-black"
+                            />
+                            <span class="text-black">{{ item.title }}</span>
                         </a>
                     </SidebarMenuButton>
                 </SidebarMenuItem>

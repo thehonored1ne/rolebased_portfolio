@@ -31,7 +31,7 @@ const submit = () => {
         <Head title="Access PIN Security" />
 
         <div
-            class="flex min-h-screen max-w-xl flex-1 flex-col gap-6 bg-[#fafafa] p-6 text-black"
+            class="flex min-h-screen w-full flex-1 flex-col gap-6 bg-[#fafafa] p-6 text-black"
         >
             <div>
                 <div class="mb-1 inline-block">
