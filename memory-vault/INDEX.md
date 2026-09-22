@@ -1,5 +1,5 @@
 # 🧭 Memory Vault Index (Map of Content)
-*Last auto-indexed: 2026-09-22 | Total Active Cards: 8*
+*Last auto-indexed: 2026-09-22 | Total Active Cards: 9*
 
 > **CRITICAL RULE FOR ALL NOTES & CARDS:**
 > All contents must be concise and straight to the point. Include only high-signal, necessary information. No fluff, no filler.
@@ -19,4 +19,5 @@
 - **[EP-20260922_164546_26cd]** [episodes/ep-20260922_164546_26cd_resolved_vitemanifestnotfoundexception.md](episodes/ep-20260922_164546_26cd_resolved_vitemanifestnotfoundexception.md) — Generated missing public/build/manifest.json by compiling assets with npm run build. `[vite, build, assets, laravel]`
 - **[EP-20260922_174013_83a4]** [episodes/ep-20260922_174013_83a4_completed_1-admin_portfolio_with_conceal.md](episodes/ep-20260922_174013_83a4_completed_1-admin_portfolio_with_conceal.md) — Built single-admin portfolio with Fortify registration lockout, concealed 6-digit access PIN gate with email reset, dynamic guest page, and full admin CMS. `[portfolio, cms, access-gate, security, fortify, vue3]`
 - **[EP-20260922_175321_1065]** [episodes/ep-20260922_175321_1065_resolved_route_function_undefined_in_vue.md](episodes/ep-20260922_175321_1065_resolved_route_function_undefined_in_vue.md) — Created lightweight route helper in lib/route.ts and attached to window and Vue app instance to provide global route resolution. `[vue, routes, wayfinder, inertia]`
+- **[EP-20260922_185408_e654]** [episodes/ep-20260922_185408_e654_resolve_pint_styling_and_phpstan_type_an.md](episodes/ep-20260922_185408_e654_resolve_pint_styling_and_phpstan_type_an.md) — Fixed 7 Pint style issues, 6 PHPStan FormRequest type warnings, and pushed clean branch to main `[ci, pint, phpstan, validation]`
 
