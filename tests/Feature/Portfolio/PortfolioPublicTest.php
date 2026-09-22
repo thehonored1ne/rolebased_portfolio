@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Portfolio;
 
-use App\Models\ContactMessage;
 use App\Models\PortfolioProfile;
 use App\Models\Project;
 use App\Models\Skill;

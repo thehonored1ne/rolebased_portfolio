@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Models\Project;
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -12,9 +14,13 @@ class ProjectRequest extends FormRequest
         return $this->user() !== null;
     }
 
+    /**
+     * @return array<string, ValidationRule|array<mixed>|string>
+     */
     public function rules(): array
     {
-        $projectId = $this->route('project')?->id;
+        $project = $this->route('project');
+        $projectId = $project instanceof Project ? $project->id : null;
 
         return [
             'title' => ['required', 'string', 'max:150'],

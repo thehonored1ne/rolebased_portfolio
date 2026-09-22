@@ -88,7 +88,7 @@ class AccessCodeController extends Controller
         RateLimiter::hit($throttleKey, 300);
 
         $admin = User::first();
-        $email = $admin?->email ?? config('mail.from.address');
+        $email = $admin ? $admin->email : config('mail.from.address');
 
         if (! $email) {
             return back()->withErrors([
