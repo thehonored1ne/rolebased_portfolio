@@ -1,0 +1,3 @@
+.system/
+*.pyc
+__pycache__/
