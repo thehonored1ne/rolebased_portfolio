@@ -73,11 +73,19 @@ const footerNavItems: NavItem[] = [
 </script>
 
 <template>
-    <Sidebar collapsible="icon" variant="inset">
-        <SidebarHeader>
+    <Sidebar
+        collapsible="icon"
+        variant="sidebar"
+        class="border-r-2 border-black bg-[#fafafa]"
+    >
+        <SidebarHeader class="border-b-2 border-black bg-white p-3">
             <SidebarMenu>
                 <SidebarMenuItem>
-                    <SidebarMenuButton size="lg" as-child>
+                    <SidebarMenuButton
+                        size="lg"
+                        as-child
+                        class="border-2 border-black bg-white shadow-[2px_2px_0px_0px_#000] hover:bg-zinc-100"
+                    >
                         <Link :href="route('dashboard')">
                             <AppLogo />
                         </Link>
@@ -86,11 +94,11 @@ const footerNavItems: NavItem[] = [
             </SidebarMenu>
         </SidebarHeader>
 
-        <SidebarContent>
+        <SidebarContent class="bg-[#fafafa] py-3">
             <NavMain :items="mainNavItems" />
         </SidebarContent>
 
-        <SidebarFooter>
+        <SidebarFooter class="border-t-2 border-black bg-white p-3">
             <NavFooter :items="footerNavItems" />
             <NavUser />
         </SidebarFooter>

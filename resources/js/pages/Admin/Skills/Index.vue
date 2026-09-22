@@ -1,8 +1,5 @@
 <script setup lang="ts">
 import InputError from '@/components/InputError.vue';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { Head, router, useForm } from '@inertiajs/vue3';
 import { Plus, Trash2, X } from '@lucide/vue';
@@ -92,39 +89,56 @@ const deleteSkill = (id: number) => {
     <AppLayout :breadcrumbs="breadcrumbs">
         <Head title="Skills Manager" />
 
-        <div class="flex max-w-5xl flex-1 flex-col gap-6 p-6">
-            <div class="flex items-center justify-between">
+        <div
+            class="flex min-h-screen max-w-5xl flex-1 flex-col gap-6 bg-[#fafafa] p-6 text-black"
+        >
+            <div
+                class="flex flex-col justify-between gap-4 sm:flex-row sm:items-center"
+            >
                 <div>
+                    <div class="mb-1 inline-block">
+                        <span
+                            class="border border-black bg-black px-2 py-0.5 font-mono text-[10px] font-bold text-white uppercase shadow-[1px_1px_0px_0px_#000]"
+                        >
+                            CAPABILITIES
+                        </span>
+                    </div>
                     <h1
-                        class="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white"
+                        class="text-3xl font-black tracking-tight text-black uppercase sm:text-4xl"
                     >
                         Skills & Technologies
                     </h1>
-                    <p class="mt-1 text-sm text-zinc-500">
+                    <p
+                        class="mt-1 font-mono text-xs font-bold text-zinc-600 uppercase"
+                    >
                         Manage categorized skills, frameworks, and proficiencies
-                        shown on your portfolio.
+                        shown on portfolio.
                     </p>
                 </div>
 
-                <Button @click="openCreateModal" class="gap-2">
+                <button
+                    type="button"
+                    @click="openCreateModal"
+                    class="inline-flex items-center gap-2 border-2 border-black bg-black px-4 py-2.5 font-mono text-xs font-bold tracking-wider text-white uppercase shadow-[3px_3px_0px_0px_#000] transition-all hover:translate-x-[-1px] hover:translate-y-[-1px] hover:bg-zinc-900 hover:shadow-[5px_5px_0px_0px_#000] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none"
+                >
                     <Plus class="h-4 w-4" />
                     New Skill
-                </Button>
+                </button>
             </div>
 
             <div
                 v-if="status"
-                class="rounded-lg border border-emerald-500/30 bg-emerald-500/10 p-4 text-sm font-medium text-emerald-500"
+                class="border-2 border-black bg-zinc-100 p-4 font-mono text-xs font-bold text-black uppercase shadow-[3px_3px_0px_0px_#000]"
             >
-                {{ status }}
+                [OK] {{ status }}
             </div>
 
             <div
-                class="overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-sm dark:border-zinc-800 dark:bg-zinc-900"
+                class="overflow-x-auto border-2 border-black bg-white shadow-[5px_5px_0px_0px_#000]"
             >
-                <table class="w-full text-left text-sm">
+                <table class="w-full text-left font-sans text-sm">
                     <thead
-                        class="border-b border-zinc-200 bg-zinc-50 text-xs text-zinc-500 uppercase dark:border-zinc-800 dark:bg-zinc-800/50 dark:text-zinc-400"
+                        class="border-b-2 border-black bg-[#fafafa] font-mono text-xs font-bold text-black uppercase"
                     >
                         <tr>
                             <th class="p-4">Technology</th>
@@ -134,61 +148,63 @@ const deleteSkill = (id: number) => {
                             <th class="p-4 text-right">Actions</th>
                         </tr>
                     </thead>
-                    <tbody
-                        class="divide-y divide-zinc-200 dark:divide-zinc-800"
-                    >
+                    <tbody class="divide-y-2 divide-black">
                         <tr
                             v-for="skill in skills"
                             :key="skill.id"
-                            class="transition-colors hover:bg-zinc-50 dark:hover:bg-zinc-800/40"
+                            class="transition-colors hover:bg-zinc-50"
                         >
                             <td
-                                class="p-4 font-semibold text-zinc-900 dark:text-white"
+                                class="p-4 font-mono text-sm font-bold text-black uppercase"
                             >
                                 {{ skill.name }}
                             </td>
                             <td class="p-4">
                                 <span
-                                    class="rounded bg-zinc-100 px-2.5 py-1 text-xs font-medium text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300"
+                                    class="border border-black bg-zinc-100 px-2.5 py-1 font-mono text-[10px] font-bold text-black uppercase"
                                 >
                                     {{ skill.category }}
                                 </span>
                             </td>
                             <td class="p-4">
-                                <div class="flex items-center gap-2">
+                                <div class="flex items-center gap-3">
                                     <div
-                                        class="h-1.5 w-24 overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-800"
+                                        class="h-3 w-28 border-2 border-black bg-zinc-100 p-0.5"
                                     >
                                         <div
-                                            class="h-full bg-emerald-500"
+                                            class="h-full bg-black transition-all duration-300"
                                             :style="{
                                                 width: `${skill.proficiency}%`,
                                             }"
                                         />
                                     </div>
-                                    <span class="text-xs text-zinc-500"
-                                        >{{ skill.proficiency }}%</span
+                                    <span
+                                        class="font-mono text-xs font-bold text-black"
                                     >
+                                        {{ skill.proficiency }}%
+                                    </span>
                                 </div>
                             </td>
-                            <td class="p-4 text-xs text-zinc-500">
+                            <td
+                                class="p-4 font-mono text-xs font-bold text-zinc-600"
+                            >
                                 {{ skill.sort_order }}
                             </td>
                             <td class="p-4 text-right">
                                 <div
-                                    class="flex items-center justify-end gap-3"
+                                    class="flex items-center justify-end gap-2"
                                 >
                                     <button
                                         type="button"
                                         @click="openEditModal(skill)"
-                                        class="text-xs font-semibold text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white"
+                                        class="border-2 border-black bg-white px-2.5 py-1 font-mono text-xs font-bold text-black uppercase shadow-[2px_2px_0px_0px_#000] transition-all hover:bg-zinc-100 active:translate-x-[1px] active:translate-y-[1px] active:shadow-none"
                                     >
                                         Edit
                                     </button>
                                     <button
                                         type="button"
                                         @click="deleteSkill(skill.id)"
-                                        class="text-xs font-semibold text-rose-500 hover:text-rose-600"
+                                        class="border-2 border-black bg-white px-2.5 py-1 font-mono text-xs font-bold text-black uppercase shadow-[2px_2px_0px_0px_#000] transition-all hover:bg-zinc-100 active:translate-x-[1px] active:translate-y-[1px] active:shadow-none"
                                     >
                                         Delete
                                     </button>
@@ -205,45 +221,58 @@ const deleteSkill = (id: number) => {
                 class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
             >
                 <div
-                    class="w-full max-w-md rounded-xl border border-zinc-200 bg-white p-6 shadow-2xl dark:border-zinc-800 dark:bg-zinc-900"
+                    class="w-full max-w-md border-2 border-black bg-white p-6 shadow-[8px_8px_0px_0px_#000] sm:p-8"
                 >
                     <div
-                        class="flex items-center justify-between border-b border-zinc-200 pb-4 dark:border-zinc-800"
+                        class="flex items-center justify-between border-b-2 border-black pb-4"
                     >
                         <h2
-                            class="text-lg font-bold text-zinc-900 dark:text-white"
+                            class="text-xl font-black tracking-tight text-black uppercase"
                         >
                             {{ editingSkill ? 'Edit Skill' : 'New Skill' }}
                         </h2>
                         <button
                             type="button"
                             @click="closeModal"
-                            class="text-zinc-400 hover:text-zinc-600 dark:hover:text-white"
+                            class="flex h-8 w-8 items-center justify-center border-2 border-black bg-white text-black shadow-[2px_2px_0px_0px_#000] transition-all hover:bg-zinc-100 active:translate-x-[1px] active:translate-y-[1px] active:shadow-none"
                         >
-                            <X class="h-5 w-5" />
+                            <X class="h-4 w-4" />
                         </button>
                     </div>
 
-                    <form @submit.prevent="saveSkill" class="mt-4 space-y-4">
-                        <div class="space-y-1">
-                            <Label for="skill_name"
-                                >Skill / Framework Name</Label
+                    <form @submit.prevent="saveSkill" class="mt-6 space-y-4">
+                        <div>
+                            <label
+                                for="skill_name"
+                                class="mb-1 block font-mono text-xs font-bold tracking-wider text-black uppercase"
                             >
-                            <Input
+                                Skill / Tool Name
+                            </label>
+                            <input
                                 id="skill_name"
+                                type="text"
                                 v-model="form.name"
                                 required
-                                placeholder="e.g. Vue 3"
+                                placeholder="e.g. TypeScript"
+                                class="w-full border-2 border-black bg-white p-3 font-sans text-sm text-black transition-shadow placeholder:text-zinc-400 focus:shadow-[4px_4px_0px_0px_#000] focus:outline-none"
                             />
-                            <InputError :message="form.errors.name" />
+                            <InputError
+                                :message="form.errors.name"
+                                class="mt-1"
+                            />
                         </div>
 
-                        <div class="space-y-1">
-                            <Label for="skill_cat">Category</Label>
+                        <div>
+                            <label
+                                for="skill_cat"
+                                class="mb-1 block font-mono text-xs font-bold tracking-wider text-black uppercase"
+                            >
+                                Category
+                            </label>
                             <select
                                 id="skill_cat"
                                 v-model="form.category"
-                                class="w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm"
+                                class="w-full border-2 border-black bg-white p-3 font-mono text-xs font-bold text-black uppercase focus:shadow-[4px_4px_0px_0px_#000] focus:outline-none"
                             >
                                 <option value="Frontend">Frontend</option>
                                 <option value="Backend">Backend</option>
@@ -251,42 +280,60 @@ const deleteSkill = (id: number) => {
                                 <option value="Tools">Tools</option>
                                 <option value="Other">Other</option>
                             </select>
-                            <InputError :message="form.errors.category" />
+                            <InputError
+                                :message="form.errors.category"
+                                class="mt-1"
+                            />
                         </div>
 
-                        <div class="space-y-1">
-                            <Label for="skill_prof"
-                                >Proficiency ({{ form.proficiency }}%)</Label
+                        <div>
+                            <div
+                                class="mb-1 flex justify-between font-mono text-xs font-bold text-black uppercase"
                             >
+                                <label for="skill_prof">Proficiency</label>
+                                <span>{{ form.proficiency }}%</span>
+                            </div>
                             <input
                                 type="range"
                                 id="skill_prof"
                                 min="10"
                                 max="100"
                                 v-model.number="form.proficiency"
-                                class="w-full"
+                                class="w-full cursor-pointer accent-black"
                             />
                         </div>
 
-                        <div class="space-y-1">
-                            <Label for="skill_order">Sort Order</Label>
-                            <Input
+                        <div>
+                            <label
+                                for="skill_order"
+                                class="mb-1 block font-mono text-xs font-bold tracking-wider text-black uppercase"
+                            >
+                                Sort Order
+                            </label>
+                            <input
                                 id="skill_order"
                                 type="number"
                                 v-model.number="form.sort_order"
+                                class="w-full border-2 border-black bg-white p-2.5 font-mono text-xs font-bold text-black focus:outline-none"
                             />
                         </div>
 
                         <div
-                            class="flex justify-end gap-3 border-t border-zinc-200 pt-4 dark:border-zinc-800"
+                            class="flex justify-end gap-3 border-t-2 border-black pt-4"
                         >
-                            <Button
+                            <button
                                 type="button"
-                                variant="outline"
                                 @click="closeModal"
-                                >Cancel</Button
+                                class="border-2 border-black bg-white px-4 py-2 font-mono text-xs font-bold tracking-wider text-black uppercase shadow-[2px_2px_0px_0px_#000] transition-all hover:bg-zinc-100"
                             >
-                            <Button type="submit">Save Skill</Button>
+                                Cancel
+                            </button>
+                            <button
+                                type="submit"
+                                class="border-2 border-black bg-black px-5 py-2 font-mono text-xs font-bold tracking-wider text-white uppercase shadow-[2px_2px_0px_0px_#000] transition-all hover:bg-zinc-900"
+                            >
+                                Save Skill
+                            </button>
                         </div>
                     </form>
                 </div>

@@ -1,8 +1,5 @@
 <script setup lang="ts">
 import InputError from '@/components/InputError.vue';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { Head, router, useForm } from '@inertiajs/vue3';
 import { Plus, Trash2, X } from '@lucide/vue';
@@ -90,58 +87,82 @@ const deleteExperience = (id: number) => {
     <AppLayout :breadcrumbs="breadcrumbs">
         <Head title="Experience Manager" />
 
-        <div class="flex max-w-4xl flex-1 flex-col gap-6 p-6">
-            <div class="flex items-center justify-between">
+        <div
+            class="flex min-h-screen max-w-4xl flex-1 flex-col gap-6 bg-[#fafafa] p-6 text-black"
+        >
+            <div
+                class="flex flex-col justify-between gap-4 sm:flex-row sm:items-center"
+            >
                 <div>
+                    <div class="mb-1 inline-block">
+                        <span
+                            class="border border-black bg-black px-2 py-0.5 font-mono text-[10px] font-bold text-white uppercase shadow-[1px_1px_0px_0px_#000]"
+                        >
+                            TRACK RECORD
+                        </span>
+                    </div>
                     <h1
-                        class="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white"
+                        class="text-3xl font-black tracking-tight text-black uppercase sm:text-4xl"
                     >
                         Work Experience Timeline
                     </h1>
-                    <p class="mt-1 text-sm text-zinc-500">
-                        Document your roles, responsibilities, and key
-                        achievements.
+                    <p
+                        class="mt-1 font-mono text-xs font-bold text-zinc-600 uppercase"
+                    >
+                        Document career roles, achievements, and impact across
+                        organizations.
                     </p>
                 </div>
 
-                <Button @click="openCreateModal" class="gap-2">
+                <button
+                    type="button"
+                    @click="openCreateModal"
+                    class="inline-flex items-center gap-2 border-2 border-black bg-black px-4 py-2.5 font-mono text-xs font-bold tracking-wider text-white uppercase shadow-[3px_3px_0px_0px_#000] transition-all hover:translate-x-[-1px] hover:translate-y-[-1px] hover:bg-zinc-900 hover:shadow-[5px_5px_0px_0px_#000] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none"
+                >
                     <Plus class="h-4 w-4" />
                     Add Milestone
-                </Button>
+                </button>
             </div>
 
             <div
                 v-if="status"
-                class="rounded-lg border border-emerald-500/30 bg-emerald-500/10 p-4 text-sm font-medium text-emerald-500"
+                class="border-2 border-black bg-zinc-100 p-4 font-mono text-xs font-bold text-black uppercase shadow-[3px_3px_0px_0px_#000]"
             >
-                {{ status }}
+                [OK] {{ status }}
             </div>
 
-            <div class="space-y-4">
+            <div class="space-y-6">
                 <div
-                    v-for="exp in experiences"
+                    v-for="(exp, index) in experiences"
                     :key="exp.id"
-                    class="rounded-xl border border-zinc-200 bg-white p-5 shadow-sm dark:border-zinc-800 dark:bg-zinc-900"
+                    class="border-2 border-black bg-white p-6 shadow-[5px_5px_0px_0px_#000] transition-all hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[7px_7px_0px_0px_#000]"
                 >
                     <div
-                        class="flex flex-wrap items-center justify-between gap-2"
+                        class="flex flex-wrap items-center justify-between gap-3"
                     >
-                        <div>
-                            <h3
-                                class="text-base font-bold text-zinc-900 dark:text-white"
+                        <div class="flex items-center gap-3">
+                            <span
+                                class="border-2 border-black bg-black px-2 py-0.5 font-mono text-xs font-bold text-white shadow-[2px_2px_0px_0px_#000]"
                             >
-                                {{ exp.role }}
-                            </h3>
-                            <p
-                                class="text-xs font-semibold text-emerald-600 dark:text-emerald-400"
-                            >
-                                {{ exp.company }}
-                            </p>
+                                0{{ index + 1 }}
+                            </span>
+                            <div>
+                                <h3
+                                    class="text-xl font-black tracking-tight text-black uppercase"
+                                >
+                                    {{ exp.role }}
+                                </h3>
+                                <p
+                                    class="font-mono text-xs font-bold text-zinc-600 uppercase"
+                                >
+                                    @ {{ exp.company }}
+                                </p>
+                            </div>
                         </div>
 
                         <div class="flex items-center gap-3">
                             <span
-                                class="rounded bg-zinc-100 px-2.5 py-1 text-xs font-medium text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300"
+                                class="border-2 border-black bg-zinc-100 px-3 py-1 font-mono text-xs font-bold text-black uppercase shadow-[2px_2px_0px_0px_#000]"
                             >
                                 {{ exp.period }}
                             </span>
@@ -149,25 +170,27 @@ const deleteExperience = (id: number) => {
                             <button
                                 type="button"
                                 @click="openEditModal(exp)"
-                                class="text-xs font-semibold text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white"
+                                class="border-2 border-black bg-white px-2.5 py-1 font-mono text-xs font-bold text-black uppercase shadow-[2px_2px_0px_0px_#000] transition-all hover:bg-zinc-100 active:translate-x-[1px] active:translate-y-[1px] active:shadow-none"
                             >
                                 Edit
                             </button>
                             <button
                                 type="button"
                                 @click="deleteExperience(exp.id)"
-                                class="text-xs font-semibold text-rose-500 hover:text-rose-600"
+                                class="border-2 border-black bg-white px-2.5 py-1 font-mono text-xs font-bold text-black uppercase shadow-[2px_2px_0px_0px_#000] transition-all hover:bg-zinc-100 active:translate-x-[1px] active:translate-y-[1px] active:shadow-none"
                             >
                                 Delete
                             </button>
                         </div>
                     </div>
 
-                    <p
-                        class="mt-3 text-xs leading-relaxed text-zinc-600 dark:text-zinc-400"
-                    >
-                        {{ exp.description }}
-                    </p>
+                    <div class="mt-4 border-t-2 border-zinc-200 pt-4">
+                        <p
+                            class="font-sans text-sm leading-relaxed font-medium text-zinc-700"
+                        >
+                            {{ exp.description }}
+                        </p>
+                    </div>
                 </div>
             </div>
 
@@ -177,92 +200,130 @@ const deleteExperience = (id: number) => {
                 class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
             >
                 <div
-                    class="w-full max-w-lg rounded-xl border border-zinc-200 bg-white p-6 shadow-2xl dark:border-zinc-800 dark:bg-zinc-900"
+                    class="w-full max-w-lg border-2 border-black bg-white p-6 shadow-[8px_8px_0px_0px_#000] sm:p-8"
                 >
                     <div
-                        class="flex items-center justify-between border-b border-zinc-200 pb-4 dark:border-zinc-800"
+                        class="flex items-center justify-between border-b-2 border-black pb-4"
                     >
                         <h2
-                            class="text-lg font-bold text-zinc-900 dark:text-white"
+                            class="text-xl font-black tracking-tight text-black uppercase"
                         >
                             {{
-                                editingExp
-                                    ? 'Edit Experience'
-                                    : 'New Experience'
+                                editingExp ? 'Edit Milestone' : 'New Milestone'
                             }}
                         </h2>
                         <button
                             type="button"
                             @click="closeModal"
-                            class="text-zinc-400 hover:text-zinc-600 dark:hover:text-white"
+                            class="flex h-8 w-8 items-center justify-center border-2 border-black bg-white text-black shadow-[2px_2px_0px_0px_#000] transition-all hover:bg-zinc-100 active:translate-x-[1px] active:translate-y-[1px] active:shadow-none"
                         >
-                            <X class="h-5 w-5" />
+                            <X class="h-4 w-4" />
                         </button>
                     </div>
 
                     <form
                         @submit.prevent="saveExperience"
-                        class="mt-4 space-y-4"
+                        class="mt-6 space-y-4"
                     >
-                        <div class="space-y-1">
-                            <Label for="exp_role">Role / Title</Label>
-                            <Input
+                        <div>
+                            <label
+                                for="exp_role"
+                                class="mb-1 block font-mono text-xs font-bold tracking-wider text-black uppercase"
+                            >
+                                Role / Title
+                            </label>
+                            <input
                                 id="exp_role"
+                                type="text"
                                 v-model="form.role"
                                 required
                                 placeholder="e.g. Lead Software Engineer"
+                                class="w-full border-2 border-black bg-white p-3 font-sans text-sm text-black transition-shadow placeholder:text-zinc-400 focus:shadow-[4px_4px_0px_0px_#000] focus:outline-none"
                             />
-                            <InputError :message="form.errors.role" />
+                            <InputError
+                                :message="form.errors.role"
+                                class="mt-1"
+                            />
                         </div>
 
-                        <div class="space-y-1">
-                            <Label for="exp_company"
-                                >Company / Organization</Label
+                        <div>
+                            <label
+                                for="exp_company"
+                                class="mb-1 block font-mono text-xs font-bold tracking-wider text-black uppercase"
                             >
-                            <Input
+                                Company / Organization
+                            </label>
+                            <input
                                 id="exp_company"
+                                type="text"
                                 v-model="form.company"
                                 required
                                 placeholder="e.g. Acme Inc."
+                                class="w-full border-2 border-black bg-white p-3 font-sans text-sm text-black transition-shadow placeholder:text-zinc-400 focus:shadow-[4px_4px_0px_0px_#000] focus:outline-none"
                             />
-                            <InputError :message="form.errors.company" />
+                            <InputError
+                                :message="form.errors.company"
+                                class="mt-1"
+                            />
                         </div>
 
-                        <div class="space-y-1">
-                            <Label for="exp_period">Timeframe / Period</Label>
-                            <Input
+                        <div>
+                            <label
+                                for="exp_period"
+                                class="mb-1 block font-mono text-xs font-bold tracking-wider text-black uppercase"
+                            >
+                                Timeframe / Period
+                            </label>
+                            <input
                                 id="exp_period"
+                                type="text"
                                 v-model="form.period"
                                 required
                                 placeholder="e.g. 2023 - Present"
+                                class="w-full border-2 border-black bg-white p-3 font-sans text-sm text-black transition-shadow placeholder:text-zinc-400 focus:shadow-[4px_4px_0px_0px_#000] focus:outline-none"
                             />
-                            <InputError :message="form.errors.period" />
+                            <InputError
+                                :message="form.errors.period"
+                                class="mt-1"
+                            />
                         </div>
 
-                        <div class="space-y-1">
-                            <Label for="exp_desc"
-                                >Description & Achievements</Label
+                        <div>
+                            <label
+                                for="exp_desc"
+                                class="mb-1 block font-mono text-xs font-bold tracking-wider text-black uppercase"
                             >
+                                Description & Key Accomplishments
+                            </label>
                             <textarea
                                 id="exp_desc"
                                 v-model="form.description"
                                 rows="3"
                                 required
-                                class="w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm"
+                                class="w-full border-2 border-black bg-white p-3 font-sans text-sm text-black transition-shadow placeholder:text-zinc-400 focus:shadow-[4px_4px_0px_0px_#000] focus:outline-none"
                             ></textarea>
-                            <InputError :message="form.errors.description" />
+                            <InputError
+                                :message="form.errors.description"
+                                class="mt-1"
+                            />
                         </div>
 
                         <div
-                            class="flex justify-end gap-3 border-t border-zinc-200 pt-4 dark:border-zinc-800"
+                            class="flex justify-end gap-3 border-t-2 border-black pt-4"
                         >
-                            <Button
+                            <button
                                 type="button"
-                                variant="outline"
                                 @click="closeModal"
-                                >Cancel</Button
+                                class="border-2 border-black bg-white px-4 py-2 font-mono text-xs font-bold tracking-wider text-black uppercase shadow-[2px_2px_0px_0px_#000] transition-all hover:bg-zinc-100"
                             >
-                            <Button type="submit">Save Experience</Button>
+                                Cancel
+                            </button>
+                            <button
+                                type="submit"
+                                class="border-2 border-black bg-black px-5 py-2 font-mono text-xs font-bold tracking-wider text-white uppercase shadow-[2px_2px_0px_0px_#000] transition-all hover:bg-zinc-900"
+                            >
+                                Save Experience
+                            </button>
                         </div>
                     </form>
                 </div>

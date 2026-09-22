@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { Button } from '@/components/ui/button';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { Head, router } from '@inertiajs/vue3';
-import { CheckCircle, Mail, MailOpen, Trash2 } from '@lucide/vue';
+import { CheckCircle, Mail, Trash2 } from '@lucide/vue';
 
 interface Message {
     id: number;
@@ -46,48 +45,52 @@ const deleteMsg = (id: number) => {
     <AppLayout :breadcrumbs="breadcrumbs">
         <Head title="Guest Inquiries Inbox" />
 
-        <div class="flex max-w-5xl flex-1 flex-col gap-6 p-6">
-            <div class="flex items-center justify-between">
-                <div>
-                    <h1
-                        class="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white"
+        <div
+            class="flex min-h-screen max-w-5xl flex-1 flex-col gap-6 bg-[#fafafa] p-6 text-black"
+        >
+            <div>
+                <div class="mb-1 inline-block">
+                    <span
+                        class="border border-black bg-black px-2 py-0.5 font-mono text-[10px] font-bold text-white uppercase shadow-[1px_1px_0px_0px_#000]"
                     >
-                        Guest Messages Inbox
-                    </h1>
-                    <p class="mt-1 text-sm text-zinc-500">
-                        Inquiries and contact submissions sent via the public
-                        portfolio page.
-                    </p>
+                        COMMUNICATION
+                    </span>
                 </div>
+                <h1
+                    class="text-3xl font-black tracking-tight text-black uppercase sm:text-4xl"
+                >
+                    Guest Messages Inbox
+                </h1>
+                <p
+                    class="mt-1 font-mono text-xs font-bold text-zinc-600 uppercase"
+                >
+                    Inquiries and transmissions submitted via the public
+                    portfolio page.
+                </p>
             </div>
 
             <div
                 v-if="status"
-                class="rounded-lg border border-emerald-500/30 bg-emerald-500/10 p-4 text-sm font-medium text-emerald-500"
+                class="border-2 border-black bg-zinc-100 p-4 font-mono text-xs font-bold text-black uppercase shadow-[3px_3px_0px_0px_#000]"
             >
-                {{ status }}
+                [OK] {{ status }}
             </div>
 
             <div
                 v-if="messages.length === 0"
-                class="rounded-xl border border-dashed border-zinc-300 p-12 text-center text-sm text-zinc-500 dark:border-zinc-800"
+                class="border-2 border-dashed border-black bg-white p-12 text-center font-mono text-xs font-bold text-zinc-500 uppercase"
             >
-                Inbox is empty. No messages submitted yet.
+                [EMPTY] Inbox is empty. No messages submitted yet.
             </div>
 
-            <div v-else class="space-y-4">
+            <div v-else class="space-y-6">
                 <div
                     v-for="msg in messages"
                     :key="msg.id"
-                    class="rounded-xl border p-5 shadow-sm transition-colors"
-                    :class="
-                        msg.is_read
-                            ? 'border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900/50'
-                            : 'border-emerald-500/40 bg-emerald-500/5 dark:bg-emerald-950/20'
-                    "
+                    class="border-2 border-black bg-white p-6 shadow-[5px_5px_0px_0px_#000] transition-all hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[7px_7px_0px_0px_#000]"
                 >
                     <div
-                        class="flex flex-wrap items-center justify-between gap-2 border-b border-zinc-100 pb-3 dark:border-zinc-800"
+                        class="flex flex-wrap items-center justify-between gap-3 border-b-2 border-zinc-200 pb-4"
                     >
                         <div class="flex items-center gap-3">
                             <button
@@ -96,23 +99,36 @@ const deleteMsg = (id: number) => {
                                 :title="
                                     msg.is_read ? 'Mark unread' : 'Mark read'
                                 "
-                                class="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200"
+                                class="flex h-8 w-8 items-center justify-center border-2 border-black bg-white text-black shadow-[1px_1px_0px_0px_#000] transition-all hover:bg-zinc-100 active:translate-x-[1px] active:translate-y-[1px] active:shadow-none"
                             >
                                 <CheckCircle
                                     v-if="msg.is_read"
-                                    class="h-4 w-4 text-emerald-500"
+                                    class="h-4 w-4 text-black"
                                 />
-                                <Mail v-else class="h-4 w-4 text-rose-500" />
+                                <Mail v-else class="h-4 w-4 text-black" />
                             </button>
 
                             <div>
-                                <span
-                                    class="text-sm font-bold text-zinc-900 dark:text-white"
-                                    >{{ msg.name }}</span
-                                >
+                                <div class="flex items-center gap-2">
+                                    <span
+                                        class="font-mono text-sm font-bold text-black uppercase"
+                                    >
+                                        {{ msg.name }}
+                                    </span>
+                                    <span
+                                        class="py-0.2 border border-black px-1.5 font-mono text-[9px] font-bold uppercase"
+                                        :class="
+                                            msg.is_read
+                                                ? 'bg-zinc-100 text-zinc-600'
+                                                : 'bg-black text-white'
+                                        "
+                                    >
+                                        {{ msg.is_read ? 'READ' : 'NEW' }}
+                                    </span>
+                                </div>
                                 <a
                                     :href="`mailto:${msg.email}`"
-                                    class="ml-2 text-xs text-zinc-500 hover:underline"
+                                    class="font-mono text-xs text-zinc-600 hover:underline"
                                 >
                                     {{ msg.email }}
                                 </a>
@@ -120,28 +136,30 @@ const deleteMsg = (id: number) => {
                         </div>
 
                         <div class="flex items-center gap-4">
-                            <span class="text-xs text-zinc-400">
+                            <span
+                                class="font-mono text-xs font-bold text-zinc-500 uppercase"
+                            >
                                 {{ new Date(msg.created_at).toLocaleString() }}
                             </span>
                             <button
                                 type="button"
                                 @click="deleteMsg(msg.id)"
-                                class="text-zinc-400 transition-colors hover:text-rose-500"
+                                class="flex h-8 w-8 items-center justify-center border-2 border-black bg-white text-black shadow-[2px_2px_0px_0px_#000] transition-all hover:bg-zinc-100 active:translate-x-[1px] active:translate-y-[1px] active:shadow-none"
                                 title="Delete message"
                             >
-                                <Trash2 class="h-4 w-4" />
+                                <Trash2 class="h-3.5 w-3.5" />
                             </button>
                         </div>
                     </div>
 
-                    <div class="mt-3">
+                    <div class="mt-4">
                         <h4
-                            class="text-sm font-semibold text-zinc-800 dark:text-zinc-200"
+                            class="font-mono text-sm font-bold tracking-wide text-black uppercase"
                         >
                             {{ msg.subject }}
                         </h4>
                         <p
-                            class="mt-2 text-sm leading-relaxed whitespace-pre-wrap text-zinc-600 dark:text-zinc-400"
+                            class="mt-2 border-l-4 border-black pl-4 font-sans text-sm leading-relaxed whitespace-pre-wrap text-zinc-700"
                         >
                             {{ msg.message }}
                         </p>

@@ -1,8 +1,5 @@
 <script setup lang="ts">
 import InputError from '@/components/InputError.vue';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import { Shield } from '@lucide/vue';
@@ -33,14 +30,25 @@ const submit = () => {
     <AppLayout :breadcrumbs="breadcrumbs">
         <Head title="Access PIN Security" />
 
-        <div class="flex max-w-xl flex-1 flex-col gap-6 p-6">
+        <div
+            class="flex min-h-screen max-w-xl flex-1 flex-col gap-6 bg-[#fafafa] p-6 text-black"
+        >
             <div>
+                <div class="mb-1 inline-block">
+                    <span
+                        class="border border-black bg-black px-2 py-0.5 font-mono text-[10px] font-bold text-white uppercase shadow-[1px_1px_0px_0px_#000]"
+                    >
+                        PORTAL GATEWAY
+                    </span>
+                </div>
                 <h1
-                    class="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white"
+                    class="text-3xl font-black tracking-tight text-black uppercase sm:text-4xl"
                 >
-                    Secret Access Code PIN
+                    Secret Access PIN
                 </h1>
-                <p class="mt-1 text-sm text-zinc-500">
+                <p
+                    class="mt-1 font-mono text-xs font-bold text-zinc-600 uppercase"
+                >
                     Update the secret 6-digit PIN required to unlock the
                     concealed admin login gate.
                 </p>
@@ -48,28 +56,33 @@ const submit = () => {
 
             <div
                 v-if="status"
-                class="rounded-lg border border-emerald-500/30 bg-emerald-500/10 p-4 text-sm font-medium text-emerald-500"
+                class="border-2 border-black bg-zinc-100 p-4 font-mono text-xs font-bold text-black uppercase shadow-[3px_3px_0px_0px_#000]"
             >
-                {{ status }}
+                [OK] {{ status }}
             </div>
 
             <form
                 @submit.prevent="submit"
-                class="space-y-6 rounded-xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900"
+                class="space-y-6 border-2 border-black bg-white p-6 shadow-[5px_5px_0px_0px_#000] sm:p-8"
             >
                 <div
-                    class="flex items-center gap-3 rounded-lg bg-zinc-50 p-4 text-xs text-zinc-600 dark:bg-zinc-800/50 dark:text-zinc-300"
+                    class="flex items-center gap-3 border-2 border-black bg-zinc-100 p-4 font-mono text-xs font-bold text-black uppercase shadow-[2px_2px_0px_0px_#000]"
                 >
-                    <Shield class="h-5 w-5 shrink-0 text-emerald-500" />
+                    <Shield class="h-5 w-5 shrink-0 text-black" />
                     <span>
                         This PIN is required before the login form can be
-                        rendered. Keep it secret and never share it publicly.
+                        unlocked. Keep it secret.
                     </span>
                 </div>
 
-                <div class="space-y-2">
-                    <Label for="code">New 6-Digit PIN</Label>
-                    <Input
+                <div>
+                    <label
+                        for="code"
+                        class="mb-1.5 block font-mono text-xs font-bold tracking-wider text-black uppercase"
+                    >
+                        New 6-Digit PIN
+                    </label>
+                    <input
                         id="code"
                         type="password"
                         inputmode="numeric"
@@ -77,14 +90,20 @@ const submit = () => {
                         maxlength="6"
                         v-model="form.code"
                         required
-                        placeholder="e.g. 749210"
+                        placeholder="&bull;&bull;&bull;&bull;&bull;&bull;"
+                        class="w-full border-2 border-black bg-white p-3 text-center font-mono text-xl font-bold tracking-widest text-black transition-shadow placeholder:text-zinc-400 focus:shadow-[4px_4px_0px_0px_#000] focus:outline-none"
                     />
-                    <InputError :message="form.errors.code" />
+                    <InputError :message="form.errors.code" class="mt-1" />
                 </div>
 
-                <div class="space-y-2">
-                    <Label for="code_confirmation">Confirm New PIN</Label>
-                    <Input
+                <div>
+                    <label
+                        for="code_confirmation"
+                        class="mb-1.5 block font-mono text-xs font-bold tracking-wider text-black uppercase"
+                    >
+                        Confirm New 6-Digit PIN
+                    </label>
+                    <input
                         id="code_confirmation"
                         type="password"
                         inputmode="numeric"
@@ -92,22 +111,27 @@ const submit = () => {
                         maxlength="6"
                         v-model="form.code_confirmation"
                         required
-                        placeholder="Repeat 6-digit PIN"
+                        placeholder="&bull;&bull;&bull;&bull;&bull;&bull;"
+                        class="w-full border-2 border-black bg-white p-3 text-center font-mono text-xl font-bold tracking-widest text-black transition-shadow placeholder:text-zinc-400 focus:shadow-[4px_4px_0px_0px_#000] focus:outline-none"
                     />
-                    <InputError :message="form.errors.code_confirmation" />
+                    <InputError
+                        :message="form.errors.code_confirmation"
+                        class="mt-1"
+                    />
                 </div>
 
-                <div class="flex justify-end">
-                    <Button
+                <div class="flex justify-end border-t-2 border-black pt-4">
+                    <button
                         type="submit"
                         :disabled="form.processing || form.code.length !== 6"
+                        class="border-2 border-black bg-black px-6 py-3 font-mono text-xs font-bold tracking-wider text-white uppercase shadow-[3px_3px_0px_0px_#000] transition-all hover:translate-x-[-2px] hover:translate-y-[-2px] hover:bg-zinc-900 hover:shadow-[5px_5px_0px_0px_#000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none disabled:opacity-50"
                     >
                         {{
                             form.processing
-                                ? 'Updating...'
-                                : 'Update Secret PIN'
+                                ? 'UPDATING...'
+                                : 'UPDATE SECRET PIN'
                         }}
-                    </Button>
+                    </button>
                 </div>
             </form>
         </div>
