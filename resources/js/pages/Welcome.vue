@@ -1,30 +1,21 @@
 <script setup lang="ts">
 import InputError from '@/components/InputError.vue';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import { route } from '@/lib/route';
 import {
     ArrowUpRight,
-    Briefcase,
-    CheckCircle2,
     Code,
     Cpu,
     ExternalLink,
     FileText,
     FolderGit2,
     Globe,
-    Layers,
-    Lock,
     Mail,
     MapPin,
     Send,
     Server,
     Share2,
     Shield,
-    Terminal,
     Wrench,
 } from '@lucide/vue';
 import { computed, ref } from 'vue';
@@ -130,59 +121,78 @@ const getCategoryIcon = (category: string) => {
     <Head :title="`${profile.name} — ${profile.title}`" />
 
     <div
-        class="min-h-screen bg-zinc-950 text-zinc-100 selection:bg-zinc-800 selection:text-white"
+        class="min-h-screen bg-[#fafafa] text-black selection:bg-black selection:text-white"
     >
-        <!-- Navigation -->
+        <!-- Top Navigation -->
         <header
-            class="sticky top-0 z-50 border-b border-zinc-800/80 bg-zinc-950/80 backdrop-blur-md"
+            class="sticky top-0 z-50 border-b-2 border-black bg-[#fafafa]/95 backdrop-blur-md"
         >
             <div
                 class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4"
             >
                 <a
                     href="#hero"
-                    class="text-lg font-bold tracking-tight text-white transition-opacity hover:opacity-80"
+                    class="group flex items-center gap-2 text-lg font-black tracking-tighter text-black uppercase"
                 >
-                    {{ profile.name }}
+                    <span
+                        class="border-2 border-black bg-black px-2 py-0.5 font-mono text-xs font-bold text-white shadow-[2px_2px_0px_0px_#000]"
+                    >
+                        DEV
+                    </span>
+                    <span
+                        class="transition-transform group-hover:translate-x-0.5"
+                    >
+                        {{ profile.name }}
+                    </span>
                 </a>
 
                 <nav
-                    class="hidden items-center gap-8 text-sm font-medium text-zinc-400 md:flex"
+                    class="hidden items-center gap-6 font-mono text-xs font-bold tracking-wider text-black uppercase md:flex"
                 >
-                    <a href="#about" class="transition-colors hover:text-white"
-                        >About</a
+                    <a
+                        href="#about"
+                        class="border-b-2 border-transparent pb-0.5 transition-colors hover:border-black"
                     >
+                        About
+                    </a>
                     <a
                         href="#projects"
-                        class="transition-colors hover:text-white"
-                        >Projects</a
+                        class="border-b-2 border-transparent pb-0.5 transition-colors hover:border-black"
                     >
-                    <a href="#skills" class="transition-colors hover:text-white"
-                        >Skills</a
+                        Projects
+                    </a>
+                    <a
+                        href="#skills"
+                        class="border-b-2 border-transparent pb-0.5 transition-colors hover:border-black"
                     >
+                        Skills
+                    </a>
                     <a
                         href="#experience"
-                        class="transition-colors hover:text-white"
-                        >Experience</a
+                        class="border-b-2 border-transparent pb-0.5 transition-colors hover:border-black"
                     >
+                        Experience
+                    </a>
                     <a
                         href="#contact"
-                        class="transition-colors hover:text-white"
-                        >Contact</a
+                        class="border-b-2 border-transparent pb-0.5 transition-colors hover:border-black"
                     >
+                        Contact
+                    </a>
                 </nav>
 
                 <div class="flex items-center gap-3">
                     <Link
                         v-if="isAdmin"
                         :href="route('dashboard')"
-                        class="rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 text-xs font-semibold text-emerald-400 transition-colors hover:bg-emerald-500/20"
+                        class="border-2 border-black bg-zinc-200 px-3 py-1.5 font-mono text-xs font-bold text-black uppercase shadow-[2px_2px_0px_0px_#000] transition-transform hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[3px_3px_0px_0px_#000] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none"
                     >
-                        CMS Dashboard
+                        Admin CMS
                     </Link>
+
                     <a
                         href="#contact"
-                        class="rounded-lg bg-zinc-100 px-4 py-2 text-xs font-semibold text-zinc-950 transition-colors hover:bg-white"
+                        class="border-2 border-black bg-black px-4 py-2 font-mono text-xs font-bold tracking-wider text-white uppercase shadow-[3px_3px_0px_0px_#000] transition-all hover:translate-x-[-2px] hover:translate-y-[-2px] hover:bg-zinc-900 hover:shadow-[5px_5px_0px_0px_#000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
                     >
                         Hire Me
                     </a>
@@ -193,120 +203,133 @@ const getCategoryIcon = (category: string) => {
         <!-- Hero Section -->
         <section
             id="hero"
-            class="relative overflow-hidden border-b border-zinc-800/50 py-24 md:py-32"
+            class="relative border-b-2 border-black py-20 md:py-28"
         >
-            <div
-                class="absolute -top-40 left-1/2 -z-10 h-96 w-[600px] -translate-x-1/2 rounded-full bg-emerald-500/10 blur-[120px]"
-            />
-
             <div class="mx-auto max-w-6xl px-6">
-                <!-- Status Pill -->
-                <div
-                    class="mb-8 inline-flex items-center gap-2.5 rounded-full border border-zinc-800 bg-zinc-900/90 px-3.5 py-1.5 text-xs font-medium text-zinc-300"
-                >
-                    <span
-                        class="h-2 w-2 rounded-full"
-                        :class="
-                            profile.is_available
-                                ? 'animate-pulse bg-emerald-500'
-                                : 'bg-amber-500'
-                        "
-                    />
-                    {{
-                        profile.is_available
-                            ? 'Available for new engineering opportunities'
-                            : 'Currently engaged in active projects'
-                    }}
+                <!-- Status Badge -->
+                <div class="mb-8 inline-block">
+                    <div
+                        class="inline-flex items-center gap-2.5 border-2 border-black bg-white px-3.5 py-1.5 font-mono text-xs font-bold uppercase shadow-[3px_3px_0px_0px_#000]"
+                    >
+                        <span
+                            class="h-2.5 w-2.5 border border-black"
+                            :class="
+                                profile.is_available
+                                    ? 'animate-pulse bg-black'
+                                    : 'bg-zinc-400'
+                            "
+                        />
+                        <span>
+                            {{
+                                profile.is_available
+                                    ? 'Status: Available For Hire'
+                                    : 'Status: Engaged In Projects'
+                            }}
+                        </span>
+                    </div>
                 </div>
 
-                <div class="max-w-3xl">
+                <div class="max-w-4xl">
                     <h1
-                        class="text-4xl font-extrabold tracking-tight text-white sm:text-6xl md:text-7xl"
+                        class="text-5xl leading-[0.95] font-black tracking-tighter text-black uppercase sm:text-7xl md:text-8xl"
                     >
                         {{ profile.name }}
                     </h1>
-                    <p
-                        class="mt-4 text-xl font-medium text-emerald-400 sm:text-2xl"
-                    >
-                        {{ profile.title }}
-                    </p>
-                    <p
-                        class="mt-6 text-base leading-relaxed text-zinc-400 sm:text-lg"
-                    >
-                        {{ profile.bio }}
-                    </p>
 
-                    <!-- Meta info & Socials -->
+                    <div class="mt-5 inline-block">
+                        <span
+                            class="border-2 border-black bg-black px-3.5 py-1.5 font-mono text-base font-bold tracking-tight text-white uppercase shadow-[4px_4px_0px_0px_#000] sm:text-xl"
+                        >
+                            {{ profile.title }}
+                        </span>
+                    </div>
+
                     <div
-                        class="mt-8 flex flex-wrap items-center gap-6 text-sm text-zinc-400"
+                        id="about"
+                        class="mt-8 max-w-3xl border-l-4 border-black pl-5"
+                    >
+                        <p
+                            class="text-base leading-relaxed font-medium text-zinc-800 sm:text-lg"
+                        >
+                            {{ profile.bio }}
+                        </p>
+                    </div>
+
+                    <!-- Meta Information -->
+                    <div
+                        class="mt-8 flex flex-wrap items-center gap-4 font-mono text-xs font-bold text-black uppercase"
                     >
                         <div
                             v-if="profile.location"
-                            class="flex items-center gap-2"
+                            class="inline-flex items-center gap-2 border-2 border-black bg-white px-3 py-1.5 shadow-[2px_2px_0px_0px_#000]"
                         >
-                            <MapPin class="h-4 w-4 text-zinc-500" />
+                            <MapPin class="h-3.5 w-3.5" />
                             <span>{{ profile.location }}</span>
                         </div>
+
                         <div
                             v-if="profile.contact_email"
-                            class="flex items-center gap-2"
+                            class="inline-flex items-center gap-2 border-2 border-black bg-white px-3 py-1.5 shadow-[2px_2px_0px_0px_#000]"
                         >
-                            <Mail class="h-4 w-4 text-zinc-500" />
+                            <Mail class="h-3.5 w-3.5" />
                             <a
                                 :href="`mailto:${profile.contact_email}`"
-                                class="transition-colors hover:text-white"
+                                class="hover:underline"
                             >
                                 {{ profile.contact_email }}
                             </a>
                         </div>
                     </div>
 
-                    <!-- Call to Actions -->
+                    <!-- Action CTAs & Social Links -->
                     <div class="mt-10 flex flex-wrap items-center gap-4">
                         <a
                             href="#projects"
-                            class="inline-flex items-center gap-2 rounded-lg bg-zinc-100 px-5 py-3 text-sm font-semibold text-zinc-950 transition-all hover:bg-white hover:shadow-lg hover:shadow-zinc-100/10"
+                            class="inline-flex items-center gap-2 border-2 border-black bg-black px-6 py-3.5 font-mono text-sm font-bold tracking-wider text-white uppercase shadow-[4px_4px_0px_0px_#000] transition-all hover:translate-x-[-2px] hover:translate-y-[-2px] hover:bg-zinc-900 hover:shadow-[6px_6px_0px_0px_#000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
                         >
-                            View Projects
+                            Explore Works
                             <ArrowUpRight class="h-4 w-4" />
                         </a>
+
                         <a
                             v-if="profile.resume_url"
                             :href="profile.resume_url"
                             target="_blank"
-                            class="inline-flex items-center gap-2 rounded-lg border border-zinc-800 bg-zinc-900/60 px-5 py-3 text-sm font-semibold text-zinc-200 transition-colors hover:border-zinc-700 hover:bg-zinc-800 hover:text-white"
+                            class="inline-flex items-center gap-2 border-2 border-black bg-white px-6 py-3.5 font-mono text-sm font-bold tracking-wider text-black uppercase shadow-[4px_4px_0px_0px_#000] transition-all hover:translate-x-[-2px] hover:translate-y-[-2px] hover:bg-zinc-100 hover:shadow-[6px_6px_0px_0px_#000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
                         >
                             <FileText class="h-4 w-4" />
                             Download Resume
                         </a>
 
-                        <div class="flex items-center gap-2 pl-2">
+                        <div class="flex items-center gap-2 sm:ml-2">
                             <a
                                 v-if="profile.github_url"
                                 :href="profile.github_url"
                                 target="_blank"
                                 rel="noreferrer"
-                                class="rounded-lg border border-zinc-800 p-2.5 text-zinc-400 transition-colors hover:border-zinc-700 hover:text-white"
+                                class="flex h-11 w-11 items-center justify-center border-2 border-black bg-white text-black shadow-[3px_3px_0px_0px_#000] transition-all hover:translate-x-[-2px] hover:translate-y-[-2px] hover:bg-zinc-100 hover:shadow-[5px_5px_0px_0px_#000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
                                 aria-label="GitHub"
                             >
                                 <FolderGit2 class="h-4 w-4" />
                             </a>
+
                             <a
                                 v-if="profile.linkedin_url"
                                 :href="profile.linkedin_url"
                                 target="_blank"
                                 rel="noreferrer"
-                                class="rounded-lg border border-zinc-800 p-2.5 text-zinc-400 transition-colors hover:border-zinc-700 hover:text-white"
+                                class="flex h-11 w-11 items-center justify-center border-2 border-black bg-white text-black shadow-[3px_3px_0px_0px_#000] transition-all hover:translate-x-[-2px] hover:translate-y-[-2px] hover:bg-zinc-100 hover:shadow-[5px_5px_0px_0px_#000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
                                 aria-label="LinkedIn"
                             >
                                 <Globe class="h-4 w-4" />
                             </a>
+
                             <a
                                 v-if="profile.twitter_url"
                                 :href="profile.twitter_url"
                                 target="_blank"
                                 rel="noreferrer"
-                                class="rounded-lg border border-zinc-800 p-2.5 text-zinc-400 transition-colors hover:border-zinc-700 hover:text-white"
+                                class="flex h-11 w-11 items-center justify-center border-2 border-black bg-white text-black shadow-[3px_3px_0px_0px_#000] transition-all hover:translate-x-[-2px] hover:translate-y-[-2px] hover:bg-zinc-100 hover:shadow-[5px_5px_0px_0px_#000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
                                 aria-label="Twitter / X"
                             >
                                 <Share2 class="h-4 w-4" />
@@ -317,110 +340,129 @@ const getCategoryIcon = (category: string) => {
             </div>
         </section>
 
+        <!-- Marquee Industrial Strip -->
+        <div
+            class="overflow-hidden border-b-2 border-black bg-black py-3 whitespace-nowrap text-white"
+        >
+            <div
+                class="inline-block font-mono text-xs font-bold tracking-widest uppercase sm:text-sm"
+            >
+                FULL-STACK ENGINEERING &bull; SECURE BY DESIGN &bull; CLEAN
+                ARCHITECTURE &bull; OWASP TOP 10 PROTECTION &bull; VUE 3 &
+                INERTIA &bull; LARAVEL &bull; TYPESCRIPT &bull; FULL-STACK
+                ENGINEERING &bull; SECURE BY DESIGN &bull; CLEAN ARCHITECTURE
+                &bull; OWASP TOP 10 PROTECTION &bull; VUE 3 & INERTIA &bull;
+                LARAVEL
+            </div>
+        </div>
+
         <!-- Projects Section -->
-        <section id="projects" class="border-b border-zinc-800/50 py-24">
+        <section id="projects" class="border-b-2 border-black py-20">
             <div class="mx-auto max-w-6xl px-6">
                 <div
-                    class="flex flex-col justify-between gap-4 md:flex-row md:items-end"
+                    class="flex flex-col justify-between gap-6 md:flex-row md:items-end"
                 >
                     <div>
-                        <span
-                            class="text-xs font-semibold tracking-widest text-emerald-400 uppercase"
-                            >Portfolio</span
-                        >
+                        <div class="inline-block">
+                            <span
+                                class="border-2 border-black bg-black px-2.5 py-1 font-mono text-xs font-bold tracking-widest text-white uppercase shadow-[2px_2px_0px_0px_#000]"
+                            >
+                                Showcase
+                            </span>
+                        </div>
                         <h2
-                            class="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl"
+                            class="mt-3 text-4xl font-black tracking-tight text-black uppercase sm:text-5xl"
                         >
-                            Featured Works
+                            Selected Works
                         </h2>
                     </div>
 
-                    <!-- Filter Toggle -->
+                    <!-- Brutalist Filter Segmented Control -->
                     <div
-                        class="inline-flex rounded-lg border border-zinc-800 bg-zinc-900/80 p-1 text-xs font-medium"
+                        class="inline-flex border-2 border-black bg-white p-1 shadow-[3px_3px_0px_0px_#000]"
                     >
                         <button
                             type="button"
                             @click="activeProjectFilter = 'featured'"
-                            class="rounded-md px-3 py-1.5 transition-colors"
+                            class="px-3.5 py-1.5 font-mono text-xs font-bold uppercase transition-all"
                             :class="
                                 activeProjectFilter === 'featured'
-                                    ? 'bg-zinc-800 text-white shadow-sm'
-                                    : 'text-zinc-400 hover:text-white'
+                                    ? 'bg-black text-white shadow-[2px_2px_0px_0px_#000]'
+                                    : 'text-black hover:bg-zinc-100'
                             "
                         >
-                            Featured ({{ featuredProjects.length }})
+                            Featured [{{ featuredProjects.length }}]
                         </button>
                         <button
                             type="button"
                             @click="activeProjectFilter = 'all'"
-                            class="rounded-md px-3 py-1.5 transition-colors"
+                            class="px-3.5 py-1.5 font-mono text-xs font-bold uppercase transition-all"
                             :class="
                                 activeProjectFilter === 'all'
-                                    ? 'bg-zinc-800 text-white shadow-sm'
-                                    : 'text-zinc-400 hover:text-white'
+                                    ? 'bg-black text-white shadow-[2px_2px_0px_0px_#000]'
+                                    : 'text-black hover:bg-zinc-100'
                             "
                         >
-                            All Projects ({{ allProjects.length }})
+                            All Works [{{ allProjects.length }}]
                         </button>
                     </div>
                 </div>
 
+                <!-- Projects Grid -->
                 <div
                     class="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
                 >
                     <article
                         v-for="project in displayedProjects"
                         :key="project.id"
-                        class="group flex flex-col justify-between rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-zinc-700 hover:bg-zinc-900/80 hover:shadow-xl hover:shadow-zinc-950/50"
+                        class="group flex flex-col justify-between border-2 border-black bg-white p-6 shadow-[5px_5px_0px_0px_#000] transition-all duration-200 hover:translate-x-[-3px] hover:translate-y-[-3px] hover:shadow-[8px_8px_0px_0px_#000]"
                     >
                         <div>
-                            <div
-                                class="flex items-center justify-between gap-4"
-                            >
+                            <div class="flex items-start justify-between gap-4">
                                 <h3
-                                    class="text-lg font-bold text-white transition-colors group-hover:text-emerald-400"
+                                    class="text-xl font-black tracking-tight text-black uppercase decoration-2 underline-offset-4 group-hover:underline"
                                 >
                                     {{ project.title }}
                                 </h3>
-                                <div class="flex items-center gap-2">
+
+                                <div class="flex shrink-0 items-center gap-2">
                                     <a
                                         v-if="project.github_url"
                                         :href="project.github_url"
                                         target="_blank"
                                         rel="noreferrer"
-                                        class="text-zinc-400 transition-colors hover:text-white"
-                                        title="View Source Code"
+                                        class="flex h-8 w-8 items-center justify-center border-2 border-black bg-white text-black shadow-[2px_2px_0px_0px_#000] transition-all hover:bg-black hover:text-white"
+                                        title="Source Code"
                                     >
-                                        <FolderGit2 class="h-4 w-4" />
+                                        <FolderGit2 class="h-3.5 w-3.5" />
                                     </a>
                                     <a
                                         v-if="project.demo_url"
                                         :href="project.demo_url"
                                         target="_blank"
                                         rel="noreferrer"
-                                        class="text-zinc-400 transition-colors hover:text-white"
+                                        class="flex h-8 w-8 items-center justify-center border-2 border-black bg-white text-black shadow-[2px_2px_0px_0px_#000] transition-all hover:bg-black hover:text-white"
                                         title="Live Demo"
                                     >
-                                        <ExternalLink class="h-4 w-4" />
+                                        <ExternalLink class="h-3.5 w-3.5" />
                                     </a>
                                 </div>
                             </div>
 
                             <p
-                                class="mt-3 text-sm leading-relaxed text-zinc-400"
+                                class="mt-4 font-sans text-sm leading-relaxed text-zinc-700"
                             >
                                 {{ project.summary }}
                             </p>
                         </div>
 
-                        <div class="mt-6 border-t border-zinc-800/60 pt-4">
+                        <div class="mt-6 border-t-2 border-black pt-4">
                             <div class="flex flex-wrap gap-1.5">
                                 <span
                                     v-for="(tech, i) in project.tech_stack ||
                                     []"
                                     :key="i"
-                                    class="rounded bg-zinc-800/80 px-2 py-0.5 text-xs font-medium text-zinc-300"
+                                    class="border border-black bg-zinc-100 px-2 py-0.5 font-mono text-[11px] font-bold text-black uppercase"
                                 >
                                     {{ tech }}
                                 </span>
@@ -432,15 +474,18 @@ const getCategoryIcon = (category: string) => {
         </section>
 
         <!-- Skills Section -->
-        <section id="skills" class="border-b border-zinc-800/50 py-24">
+        <section id="skills" class="border-b-2 border-black py-20">
             <div class="mx-auto max-w-6xl px-6">
                 <div>
-                    <span
-                        class="text-xs font-semibold tracking-widest text-emerald-400 uppercase"
-                        >Capabilities</span
-                    >
+                    <div class="inline-block">
+                        <span
+                            class="border-2 border-black bg-black px-2.5 py-1 font-mono text-xs font-bold tracking-widest text-white uppercase shadow-[2px_2px_0px_0px_#000]"
+                        >
+                            Stack & Tooling
+                        </span>
+                    </div>
                     <h2
-                        class="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl"
+                        class="mt-3 text-4xl font-black tracking-tight text-black uppercase sm:text-5xl"
                     >
                         Technical Arsenal
                     </h2>
@@ -452,18 +497,20 @@ const getCategoryIcon = (category: string) => {
                     <div
                         v-for="(categorySkills, categoryName) in skills"
                         :key="categoryName"
-                        class="rounded-xl border border-zinc-800/80 bg-zinc-900/30 p-6"
+                        class="border-2 border-black bg-white p-6 shadow-[5px_5px_0px_0px_#000]"
                     >
                         <div class="flex items-center gap-3">
                             <div
-                                class="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-400"
+                                class="flex h-10 w-10 items-center justify-center border-2 border-black bg-black text-white shadow-[2px_2px_0px_0px_#000]"
                             >
                                 <component
                                     :is="getCategoryIcon(String(categoryName))"
                                     class="h-5 w-5"
                                 />
                             </div>
-                            <h3 class="text-base font-bold text-white">
+                            <h3
+                                class="text-lg font-black tracking-tight text-black uppercase"
+                            >
                                 {{ categoryName }}
                             </h3>
                         </div>
@@ -475,20 +522,24 @@ const getCategoryIcon = (category: string) => {
                                 class="flex flex-col gap-1.5"
                             >
                                 <div
-                                    class="flex items-center justify-between text-xs font-medium"
+                                    class="flex items-center justify-between font-mono text-xs font-bold uppercase"
                                 >
-                                    <span class="text-zinc-200">{{
-                                        skill.name
-                                    }}</span>
-                                    <span class="text-zinc-500"
-                                        >{{ skill.proficiency }}%</span
+                                    <span class="text-black">
+                                        {{ skill.name }}
+                                    </span>
+                                    <span
+                                        class="border border-black bg-zinc-100 px-1.5 py-0.5 text-[10px]"
                                     >
+                                        {{ skill.proficiency }}%
+                                    </span>
                                 </div>
+
+                                <!-- Brutalist Progress Bar -->
                                 <div
-                                    class="h-1.5 w-full overflow-hidden rounded-full bg-zinc-800"
+                                    class="h-3 w-full border-2 border-black bg-zinc-100 p-0.5"
                                 >
                                     <div
-                                        class="h-full rounded-full bg-emerald-500 transition-all duration-500"
+                                        class="h-full bg-black transition-all duration-500"
                                         :style="{
                                             width: `${skill.proficiency}%`,
                                         }"
@@ -501,54 +552,64 @@ const getCategoryIcon = (category: string) => {
             </div>
         </section>
 
-        <!-- Experience Timeline -->
-        <section id="experience" class="border-b border-zinc-800/50 py-24">
+        <!-- Experience Section -->
+        <section id="experience" class="border-b-2 border-black py-20">
             <div class="mx-auto max-w-4xl px-6">
-                <div class="text-center">
-                    <span
-                        class="text-xs font-semibold tracking-widest text-emerald-400 uppercase"
-                        >Journey</span
-                    >
+                <div>
+                    <div class="inline-block">
+                        <span
+                            class="border-2 border-black bg-black px-2.5 py-1 font-mono text-xs font-bold tracking-widest text-white uppercase shadow-[2px_2px_0px_0px_#000]"
+                        >
+                            Track Record
+                        </span>
+                    </div>
                     <h2
-                        class="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl"
+                        class="mt-3 text-4xl font-black tracking-tight text-black uppercase sm:text-5xl"
                     >
                         Work Experience
                     </h2>
                 </div>
 
-                <div
-                    class="relative mt-16 pl-6 before:absolute before:top-2 before:left-2 before:h-[calc(100%-20px)] before:w-0.5 before:bg-zinc-800"
-                >
+                <div class="mt-12 space-y-8">
                     <div
-                        v-for="exp in experiences"
+                        v-for="(exp, index) in experiences"
                         :key="exp.id"
-                        class="relative mb-12 last:mb-0"
+                        class="border-2 border-black bg-white p-6 shadow-[5px_5px_0px_0px_#000] sm:p-8"
                     >
-                        <span
-                            class="absolute top-1.5 -left-[23px] h-3 w-3 rounded-full border-2 border-zinc-950 bg-emerald-400"
-                        />
                         <div
-                            class="rounded-xl border border-zinc-800/80 bg-zinc-900/30 p-6"
+                            class="flex flex-wrap items-center justify-between gap-3"
                         >
-                            <div
-                                class="flex flex-wrap items-center justify-between gap-2"
-                            >
-                                <h3 class="text-base font-bold text-white">
+                            <div class="flex items-center gap-3">
+                                <span
+                                    class="border-2 border-black bg-black px-2.5 py-1 font-mono text-xs font-bold text-white shadow-[2px_2px_0px_0px_#000]"
+                                >
+                                    0{{ index + 1 }}
+                                </span>
+                                <h3
+                                    class="text-xl font-black tracking-tight text-black uppercase"
+                                >
                                     {{ exp.role }}
                                 </h3>
-                                <span
-                                    class="rounded bg-zinc-800 px-2.5 py-1 text-xs font-medium text-zinc-400"
-                                >
-                                    {{ exp.period }}
-                                </span>
                             </div>
-                            <p
-                                class="mt-1 text-sm font-medium text-emerald-400"
+
+                            <span
+                                class="border-2 border-black bg-zinc-100 px-3 py-1 font-mono text-xs font-bold text-black uppercase shadow-[2px_2px_0px_0px_#000]"
                             >
-                                {{ exp.company }}
-                            </p>
+                                {{ exp.period }}
+                            </span>
+                        </div>
+
+                        <div class="mt-2">
                             <p
-                                class="mt-4 text-sm leading-relaxed text-zinc-400"
+                                class="font-mono text-sm font-bold tracking-wide text-zinc-700 uppercase"
+                            >
+                                @ {{ exp.company }}
+                            </p>
+                        </div>
+
+                        <div class="mt-4 border-t-2 border-zinc-200 pt-4">
+                            <p
+                                class="font-sans text-sm leading-relaxed font-medium text-zinc-700"
                             >
                                 {{ exp.description }}
                             </p>
@@ -558,34 +619,43 @@ const getCategoryIcon = (category: string) => {
             </div>
         </section>
 
-        <!-- Contact Form Section -->
-        <section id="contact" class="py-24">
+        <!-- Contact Section -->
+        <section id="contact" class="py-20">
             <div class="mx-auto max-w-3xl px-6">
                 <div class="text-center">
-                    <span
-                        class="text-xs font-semibold tracking-widest text-emerald-400 uppercase"
-                        >Get In Touch</span
-                    >
+                    <div class="inline-block">
+                        <span
+                            class="border-2 border-black bg-black px-2.5 py-1 font-mono text-xs font-bold tracking-widest text-white uppercase shadow-[2px_2px_0px_0px_#000]"
+                        >
+                            Communication
+                        </span>
+                    </div>
                     <h2
-                        class="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl"
+                        class="mt-3 text-4xl font-black tracking-tight text-black uppercase sm:text-5xl"
                     >
-                        Send a Message
+                        Direct Inquiry
                     </h2>
-                    <p class="mt-3 text-sm text-zinc-400">
-                        Have an opportunity, question, or project in mind? Reach
-                        out directly.
+                    <p
+                        class="mt-3 font-mono text-xs font-bold tracking-wider text-zinc-600 uppercase"
+                    >
+                        Have an opportunity, technical challenge, or inquiry?
+                        Transmit below.
                     </p>
                 </div>
 
+                <!-- Flash Status Alert -->
                 <div
                     v-if="status"
-                    class="mt-8 rounded-lg border border-emerald-500/30 bg-emerald-500/10 p-4 text-center text-sm font-medium text-emerald-400"
+                    class="mt-8 border-2 border-black bg-zinc-100 p-4 font-mono text-sm font-bold text-black uppercase shadow-[4px_4px_0px_0px_#000]"
                 >
-                    {{ status }}
+                    [OK] {{ status }}
                 </div>
 
-                <form @submit.prevent="submitContact" class="mt-10 space-y-6">
-                    <!-- Invisible Honeypot to trap automated bots -->
+                <form
+                    @submit.prevent="submitContact"
+                    class="mt-10 space-y-6 border-2 border-black bg-white p-6 shadow-[6px_6px_0px_0px_#000] sm:p-8"
+                >
+                    <!-- Honeypot -->
                     <input
                         type="text"
                         name="website_hp"
@@ -596,102 +666,128 @@ const getCategoryIcon = (category: string) => {
                     />
 
                     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                        <div class="space-y-2">
-                            <Label for="name" class="text-zinc-300"
-                                >Your Name</Label
+                        <div>
+                            <label
+                                for="name"
+                                class="mb-1.5 block font-mono text-xs font-bold tracking-wider text-black uppercase"
                             >
-                            <Input
+                                Your Name
+                            </label>
+                            <input
                                 id="name"
+                                type="text"
                                 v-model="contactForm.name"
                                 required
                                 placeholder="Jane Doe"
-                                class="border-zinc-800 bg-zinc-900/60 text-white focus:border-emerald-500"
+                                class="w-full border-2 border-black bg-white p-3 font-sans text-sm text-black transition-shadow placeholder:text-zinc-400 focus:shadow-[4px_4px_0px_0px_#000] focus:outline-none"
                             />
-                            <InputError :message="contactForm.errors.name" />
+                            <InputError
+                                :message="contactForm.errors.name"
+                                class="mt-1"
+                            />
                         </div>
 
-                        <div class="space-y-2">
-                            <Label for="email" class="text-zinc-300"
-                                >Email Address</Label
+                        <div>
+                            <label
+                                for="email"
+                                class="mb-1.5 block font-mono text-xs font-bold tracking-wider text-black uppercase"
                             >
-                            <Input
+                                Email Address
+                            </label>
+                            <input
                                 id="email"
                                 type="email"
                                 v-model="contactForm.email"
                                 required
                                 placeholder="jane@example.com"
-                                class="border-zinc-800 bg-zinc-900/60 text-white focus:border-emerald-500"
+                                class="w-full border-2 border-black bg-white p-3 font-sans text-sm text-black transition-shadow placeholder:text-zinc-400 focus:shadow-[4px_4px_0px_0px_#000] focus:outline-none"
                             />
-                            <InputError :message="contactForm.errors.email" />
+                            <InputError
+                                :message="contactForm.errors.email"
+                                class="mt-1"
+                            />
                         </div>
                     </div>
 
-                    <div class="space-y-2">
-                        <Label for="subject" class="text-zinc-300"
-                            >Subject</Label
+                    <div>
+                        <label
+                            for="subject"
+                            class="mb-1.5 block font-mono text-xs font-bold tracking-wider text-black uppercase"
                         >
-                        <Input
+                            Subject
+                        </label>
+                        <input
                             id="subject"
+                            type="text"
                             v-model="contactForm.subject"
                             required
-                            placeholder="Engineering project inquiry"
-                            class="border-zinc-800 bg-zinc-900/60 text-white focus:border-emerald-500"
+                            placeholder="System Architecture / Contract Inquiry"
+                            class="w-full border-2 border-black bg-white p-3 font-sans text-sm text-black transition-shadow placeholder:text-zinc-400 focus:shadow-[4px_4px_0px_0px_#000] focus:outline-none"
                         />
-                        <InputError :message="contactForm.errors.subject" />
+                        <InputError
+                            :message="contactForm.errors.subject"
+                            class="mt-1"
+                        />
                     </div>
 
-                    <div class="space-y-2">
-                        <Label for="message" class="text-zinc-300"
-                            >Message</Label
+                    <div>
+                        <label
+                            for="message"
+                            class="mb-1.5 block font-mono text-xs font-bold tracking-wider text-black uppercase"
                         >
+                            Transmission Message
+                        </label>
                         <textarea
                             id="message"
                             v-model="contactForm.message"
                             rows="5"
                             required
-                            placeholder="Hello, I would love to discuss..."
-                            class="w-full rounded-md border border-zinc-800 bg-zinc-900/60 p-3 text-sm text-white placeholder-zinc-500 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 focus:outline-none"
+                            placeholder="Detail your engineering requirements or project scope..."
+                            class="w-full border-2 border-black bg-white p-3 font-sans text-sm text-black transition-shadow placeholder:text-zinc-400 focus:shadow-[4px_4px_0px_0px_#000] focus:outline-none"
                         ></textarea>
-                        <InputError :message="contactForm.errors.message" />
+                        <InputError
+                            :message="contactForm.errors.message"
+                            class="mt-1"
+                        />
                     </div>
 
-                    <Button
+                    <button
                         type="submit"
-                        class="w-full bg-emerald-500 font-semibold text-zinc-950 hover:bg-emerald-400"
+                        class="inline-flex w-full items-center justify-center gap-2 border-2 border-black bg-black py-4 font-mono text-sm font-bold tracking-widest text-white uppercase shadow-[4px_4px_0px_0px_#000] transition-all hover:translate-x-[-2px] hover:translate-y-[-2px] hover:bg-zinc-900 hover:shadow-[6px_6px_0px_0px_#000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none disabled:opacity-50"
                         :disabled="contactForm.processing"
                     >
-                        <Send class="mr-2 h-4 w-4" />
+                        <Send class="h-4 w-4" />
                         {{
                             contactForm.processing
-                                ? 'Sending...'
-                                : 'Transmit Message'
+                                ? 'TRANSMITTING...'
+                                : 'TRANSMIT MESSAGE'
                         }}
-                    </Button>
+                    </button>
                 </form>
             </div>
         </section>
 
         <!-- Footer with Concealed Admin Trigger -->
-        <footer class="border-t border-zinc-800/80 bg-zinc-950 py-12">
+        <footer class="border-t-2 border-black bg-white py-12">
             <div
-                class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 text-xs text-zinc-500 sm:flex-row"
+                class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 font-mono text-xs font-bold text-zinc-600 uppercase sm:flex-row"
             >
                 <p>
                     &copy; {{ new Date().getFullYear() }} {{ profile.name }}.
-                    All rights reserved.
+                    ALL RIGHTS RESERVED.
                 </p>
 
                 <div class="flex items-center gap-4">
-                    <span>Designed for performance & security</span>
+                    <span>SECURITY FIRST // PERFORMANCE ENGINE</span>
 
-                    <!-- Concealed Admin Trigger: Discreet icon with low opacity -->
+                    <!-- Concealed Admin Trigger: Discreet icon with minimal contrast -->
                     <Link
                         :href="route('access-gate.show')"
-                        class="cursor-default text-zinc-800 transition-colors duration-300 hover:text-zinc-500"
-                        title="Portal Gateway"
-                        aria-label="Portal Access Gate"
+                        class="cursor-default text-zinc-300 transition-colors duration-300 hover:text-black"
+                        title="Sys"
+                        aria-label="Access Gateway"
                     >
-                        <Shield class="h-3.5 w-3.5" />
+                        <Shield class="h-3 w-3" />
                     </Link>
                 </div>
             </div>
